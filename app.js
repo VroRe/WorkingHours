@@ -483,7 +483,7 @@ async function exportieren() {
   const datei = new File([csvErzeugen()], `Stunden-${heute()}.csv`, { type: 'text/csv' });
   try {
     if (navigator.canShare && navigator.canShare({ files: [datei] })) {
-      await navigator.share({ files: [datei], title: 'Stundenerfassung' });
+      await navigator.share({ files: [datei], title: 'WorkingHours' });
       return meldung('ok', 'CSV geteilt.');
     }
     const a = document.createElement('a');

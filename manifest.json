@@ -1,6 +1,6 @@
 {
-  "name": "Stundenerfassung",
-  "short_name": "Stunden",
+  "name": "WorkingHours",
+  "short_name": "WorkingHours",
   "lang": "de",
   "start_url": "./",
   "scope": "./",

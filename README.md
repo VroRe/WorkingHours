@@ -1,4 +1,4 @@
-# Stundenerfassung
+# WorkingHours
 
 Eine einfache mobile Web-App (PWA) zum Erfassen von Arbeitszeiten. Sie läuft komplett im Browser des Smartphones. Alle Einträge werden nur lokal auf dem Gerät gespeichert. Es gibt keinen Server, kein Benutzerkonto und keine Verbindung zu Excel oder zu Cloud-Diensten.
 
@@ -69,7 +69,7 @@ Beim Import überschreiben Einträge mit gleichem Datum die vorhandenen. Eine fe
 | `app.js` | Logik, Speicherung, Berechnung, Import und Export |
 | `sw.js` | Service Worker für den Offline-Betrieb |
 | `manifest.json` | App-Beschreibung für die Installation |
-| `icon-192.png`, `icon-512.png` | App-Symbole |
+| `icon-192.png`, `icon-512.png`, `apple-touch-icon.png` | App-Symbol (Bauhelm) |
 | `Montserrat-Variable.ttf`, `Montserrat-OFL.txt` | Schrift Montserrat (SIL Open Font License) |
 
 ## Aktualisieren

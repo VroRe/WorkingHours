@@ -6,7 +6,11 @@
 <meta name="theme-color" content="#7C1E1E">
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
-<title>Stunden</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="WorkingHours">
+<title>WorkingHours</title>
 <style>
   @font-face { font-family: 'Montserrat'; src: url('Montserrat-Variable.ttf') format('truetype'); font-weight: 100 900; font-style: normal; font-display: swap; }
   /* Farben nach der Farbskala: Bordeaux, Anthrazit, Grautöne; Altrosa, Pastellblau und Safran als Akzente */
@@ -58,13 +62,18 @@
   .nav button { padding: 0; font-size: 22px; }
   /* Eingabemaske: kompakt, damit sie ohne Scrollen auf einen Bildschirm passt */
   h1 { margin: 2px 0 8px; }
-  .raster { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin-bottom: 8px; }
+  .raster { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; margin-bottom: 8px; }
+  .raster.eins { grid-template-columns: minmax(0, 1fr); }
+  .raster input, .raster select { min-width: 0; max-width: 100%; -webkit-appearance: none; appearance: none; }
+  .raster input[type=date] { display: block; text-align: left; }
+  .raster select { background-image: linear-gradient(45deg, transparent 50%, var(--mute) 50%), linear-gradient(135deg, var(--mute) 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 36px; }
   .raster > div { min-width: 0; }
   #seite-eingabe label { margin-bottom: 3px; }
   #seite-eingabe input, #seite-eingabe select { height: 46px; }
   #seite-eingabe .zwei { gap: 6px; }
   #seite-eingabe .zwei button { min-height: 46px; padding: 0 4px; font-size: 13px; }
-  #tagHinweis { min-height: 14px; margin: 0 0 8px; }
+  #tagHinweis { margin: 0 0 8px; }
+  #tagHinweis:empty { display: none; }
   .mit-jetzt { position: relative; }
   .mit-jetzt input { padding-right: 62px; }
   .mit-jetzt button { position: absolute; right: 5px; top: 5px; min-height: 0; height: 36px; width: 52px; padding: 0; font-size: 11px; background: var(--grau); border: 0; }
@@ -101,14 +110,14 @@
 </style>
 </head>
 <body>
-<h1>Stundenerfassung</h1>
+<h1>WorkingHours</h1>
 <div class="tabs" role="tablist">
   <button type="button" class="tab" id="tab-eingabe" role="tab" data-seite="eingabe" aria-selected="true">Eingabe</button>
   <button type="button" class="tab" id="tab-dashboard" role="tab" data-seite="dashboard" aria-selected="false">Dashboard</button>
 </div>
 
 <main id="seite-eingabe" class="seite">
-<div class="raster">
+<div class="raster eins">
   <div>
     <label for="datum">Datum</label>
     <input type="date" id="datum">
