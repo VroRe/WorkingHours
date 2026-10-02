@@ -4,14 +4,18 @@ Eine einfache mobile Web-App (PWA) zum Erfassen von Arbeitszeiten. Sie läuft ko
 
 ## Funktionen
 
+- **Zwei Seiten:** *Eingabe* (beim Start immer sichtbar) und *Dashboard*.
 - **Erfassung pro Tag:** Datum (heute vorbelegt), Haus verlassen, Arbeitsbeginn, Arbeitsende, Ankunft zu Hause, Pause (Minuten), Ziel des Tages (Büro oder Baustelle).
+- **Uhrzeit per Zahlentastatur:** `745` oder `0745` ergibt 07:45, `7` ergibt 07:00. Ungültige Eingaben werden rot markiert.
 - **Abwesenheit:** Urlaub oder Krank. Die Zeitfelder werden dann gesperrt und es werden 8 Stunden angerechnet.
 - **„Jetzt“-Knöpfe** setzen die aktuelle Uhrzeit in das jeweilige Feld.
 - **Letztes Ziel** wird automatisch vorbelegt.
-- **Auswertung** je Tag und für den laufenden Monat:
-  - Fahrzeit hin und zurück
-  - Arbeitszeit netto nach Pause
-  - Soll und Differenz
+- **Dashboard:**
+  - Monatskacheln mit Ist, Soll, Differenz und Fahrzeit, mit Monatsnavigation
+  - Balkendiagramm der Stunden pro Kalenderwoche (Ist als Balken, Soll als Markierung), Tipp auf eine Woche zeigt die Details, dazu Summe und Tabellenansicht
+  - Urlaub und Krank im Jahr mit Anzahl und Daten
+  - Alle Tage des Monats mit Tagesbalken, Wochenende und Feiertage als schmale Zeilen
+- **Bayerische Feiertage** werden berechnet (inklusive Mariä Himmelfahrt für katholische Gemeinden sowie der freien Tage 24.12. und 31.12.). An Feiertagen ist das Soll 0. Das Augsburger Friedensfest fehlt.
 - **CSV-Export** über das Teilen-Menü des Handys (zum Beispiel nach OneDrive oder per E-Mail).
 - **CSV-Import** zur Wiederherstellung oder zum Gerätewechsel.
 - **Sicherungs-Erinnerung**, wenn die letzte Sicherung länger als 7 Tage zurückliegt.
@@ -26,11 +30,11 @@ Eine einfache mobile Web-App (PWA) zum Erfassen von Arbeitszeiten. Sie läuft ko
 | Arbeitszeit vor Pause | Arbeitsende minus Arbeitsbeginn |
 | Pausenabzug | Größerer Wert aus 30 Minuten und der eingetragenen Pause |
 | Arbeitszeit netto | Arbeitszeit vor Pause minus Pausenabzug, mindestens 0 |
-| Soll | 8 Stunden von Montag bis Freitag, sonst 0 |
+| Soll | 8 Stunden von Montag bis Freitag, außer an Feiertagen |
 | Urlaub / Krank | Ist gleich Soll des Tages, Differenz 0 |
 | Differenz | Ist minus Soll |
 
-Die Fahrzeit zählt nicht zur Arbeitszeit. Feiertage sind nicht hinterlegt. Das Soll an einem Feiertag ist daher 8 Stunden, wenn dort gearbeitet wird.
+Die Fahrzeit zählt nicht zur Arbeitszeit. Das Soll zählt nur für Tage mit einem Eintrag, nicht erfasste Werktage erscheinen nicht als Minus.
 
 ## Installation
 
@@ -66,6 +70,7 @@ Beim Import überschreiben Einträge mit gleichem Datum die vorhandenen. Eine fe
 | `sw.js` | Service Worker für den Offline-Betrieb |
 | `manifest.json` | App-Beschreibung für die Installation |
 | `icon-192.png`, `icon-512.png` | App-Symbole |
+| `Montserrat-Variable.ttf`, `Montserrat-OFL.txt` | Schrift Montserrat (SIL Open Font License) |
 
 ## Aktualisieren
 

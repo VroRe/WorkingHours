@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = 'stunden-v2';
-const DATEIEN = ['./', 'index.html', 'app.js', 'manifest.json', 'icon-192.png', 'icon-512.png'];
+const CACHE = 'stunden-v7';
+const DATEIEN = ['./', 'index.html', 'app.js', 'manifest.json', 'icon-192.png', 'icon-512.png', 'Montserrat-Variable.ttf'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(DATEIEN)).then(() => self.skipWaiting()));
