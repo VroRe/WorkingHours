@@ -56,6 +56,19 @@
   .seite[hidden] { display: none; }
   .nav { display: grid; grid-template-columns: 52px 1fr 52px; gap: 8px; align-items: center; text-align: center; font-weight: 600; letter-spacing: .04em; margin-top: 14px; }
   .nav button { padding: 0; font-size: 22px; }
+  /* Eingabemaske: kompakt, damit sie ohne Scrollen auf einen Bildschirm passt */
+  h1 { margin: 2px 0 8px; }
+  .raster { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; margin-bottom: 8px; }
+  .raster > div { min-width: 0; }
+  #seite-eingabe label { margin-bottom: 3px; }
+  #seite-eingabe input, #seite-eingabe select { height: 46px; }
+  #seite-eingabe .zwei { gap: 6px; }
+  #seite-eingabe .zwei button { min-height: 46px; padding: 0 4px; font-size: 13px; }
+  #tagHinweis { min-height: 14px; margin: 0 0 8px; }
+  .mit-jetzt { position: relative; }
+  .mit-jetzt input { padding-right: 62px; }
+  .mit-jetzt button { position: absolute; right: 5px; top: 5px; min-height: 0; height: 36px; width: 52px; padding: 0; font-size: 11px; background: var(--grau); border: 0; }
+  #seite-eingabe .gross { margin-top: 4px; min-height: 52px; }
   .kacheln { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
   .kachel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; min-width: 0; }
   .kachel.hero { border-left: 3px solid var(--rot); }
@@ -95,36 +108,42 @@
 </div>
 
 <main id="seite-eingabe" class="seite">
-<label for="datum">Datum</label>
-<input type="date" id="datum">
-<p class="klein" id="tagHinweis" style="margin:4px 0 12px"></p>
+<div class="raster">
+  <div>
+    <label for="datum">Datum</label>
+    <input type="date" id="datum">
+  </div>
+  <div>
+    <label for="abw">Abwesenheit</label>
+    <select id="abw">
+      <option value="">– keine –</option>
+      <option value="Urlaub">Urlaub</option>
+      <option value="Krank">Krank</option>
+    </select>
+  </div>
+</div>
+<p class="klein" id="tagHinweis"></p>
 
-<label for="abw">Abwesenheit</label>
-<select id="abw" style="margin-bottom:12px">
-  <option value="">– keine –</option>
-  <option value="Urlaub">Urlaub</option>
-  <option value="Krank">Krank</option>
-</select>
-
-<div id="zeiten">
-  <div class="zeile"><div><label for="haus">Haus verlassen</label><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="haus"></div><button type="button" data-jetzt="haus">Jetzt</button></div>
-  <div class="zeile"><div><label for="beginn">Arbeitsbeginn</label><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="beginn"></div><button type="button" data-jetzt="beginn">Jetzt</button></div>
-  <div class="zeile"><div><label for="ende">Arbeitsende</label><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="ende"></div><button type="button" data-jetzt="ende">Jetzt</button></div>
-  <div class="zeile"><div><label for="zuhause">Ankunft zu Hause</label><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="zuhause"></div><button type="button" data-jetzt="zuhause">Jetzt</button></div>
-
-  <label for="pause">Pause (Min) – nur eintragen, wenn länger als 30</label>
-  <input type="number" id="pause" inputmode="numeric" min="0" max="600" step="1" style="margin-bottom:12px">
-
-  <label>Ziel des Tages</label>
-  <div class="zwei" style="margin-bottom:12px">
-    <button type="button" class="ziel" data-ziel="Büro" aria-pressed="false">Büro</button>
-    <button type="button" class="ziel" data-ziel="Baustelle" aria-pressed="false">Baustelle</button>
+<div class="raster" id="zeiten">
+  <div><label for="haus">Haus verlassen</label><div class="mit-jetzt"><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="haus"><button type="button" data-jetzt="haus">Jetzt</button></div></div>
+  <div><label for="beginn">Arbeitsbeginn</label><div class="mit-jetzt"><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="beginn"><button type="button" data-jetzt="beginn">Jetzt</button></div></div>
+  <div><label for="ende">Arbeitsende</label><div class="mit-jetzt"><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="ende"><button type="button" data-jetzt="ende">Jetzt</button></div></div>
+  <div><label for="zuhause">Ankunft zu Hause</label><div class="mit-jetzt"><input type="text" inputmode="numeric" autocomplete="off" placeholder="hh:mm" maxlength="5" id="zuhause"><button type="button" data-jetzt="zuhause">Jetzt</button></div></div>
+  <div>
+    <label for="pause">Pause (Min), nur &gt; 30</label>
+    <input type="number" id="pause" inputmode="numeric" min="0" max="600" step="1">
+  </div>
+  <div>
+    <label>Ziel des Tages</label>
+    <div class="zwei">
+      <button type="button" class="ziel" data-ziel="Büro" aria-pressed="false">Büro</button>
+      <button type="button" class="ziel" data-ziel="Baustelle" aria-pressed="false">Baustelle</button>
+    </div>
   </div>
 </div>
 
 <button type="button" class="gross" id="speichern">Speichern</button>
 <div id="meldung" role="status" aria-live="polite"></div>
-<p class="klein">Uhrzeit mit der Zahlentastatur eintippen, zum Beispiel 745 oder 0745 für 07:45.</p>
 </main>
 
 <main id="seite-dashboard" class="seite" hidden>

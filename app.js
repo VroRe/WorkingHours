@@ -1,7 +1,6 @@
 'use strict';
 
 const KEY = 'sb_eintraege';
-const KEY_ZIEL = 'sb_letztes_ziel';
 const KEY_EXPORT = 'sb_letzter_export';
 const ZEITFELDER = ['haus', 'beginn', 'ende', 'zuhause'];
 const NAMEN = { haus: 'Haus verlassen', beginn: 'Arbeitsbeginn', ende: 'Arbeitsende', zuhause: 'Ankunft zu Hause' };
@@ -9,7 +8,7 @@ const WOCHENTAGE = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 
 const $ = (id) => document.getElementById(id);
 let daten = laden();
-let ziel = localStorage.getItem(KEY_ZIEL) || 'Büro';
+let ziel = 'Baustelle';
 
 function laden() {
   try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; }
@@ -110,7 +109,7 @@ function formularFuellen(iso) {
   ZEITFELDER.forEach((f) => { $(f).value = e[f] || ''; $(f).classList.remove('ungueltig'); });
   $('pause').value = e.pause ?? '';
   tagHinweis(iso);
-  zielSetzen(e.ziel || localStorage.getItem(KEY_ZIEL) || 'Büro');
+  zielSetzen(e.ziel || 'Baustelle');
   abwesenheitAnwenden();
 }
 
@@ -143,7 +142,6 @@ function speichern() {
   try {
     daten[iso] = e;
     sichern();
-    if (e.ziel) localStorage.setItem(KEY_ZIEL, e.ziel);
   } catch (err) {
     // Formular bleibt unverändert, nichts geht verloren.
     return meldung('fehler', `Nicht gespeichert: ${err.message}. Die Eingaben stehen noch im Formular.`);
